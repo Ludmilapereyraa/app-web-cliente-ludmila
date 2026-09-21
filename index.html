@@ -1,25 +1,25 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tienda ecommerce de Cliente Ludmila">
-    <title>Cliente Ludmila - Tienda</title>
+    <title>Tienda de Guitarras</title>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#productos">Guitarras</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="carrito.html">Carrito</a></li>
             </ul>
         </nav>
 
         <div class="buscador">
             <form action="#" method="get" role="search">
-                <label for="busqueda">Buscar productos</label>
+                <label for="busqueda">Buscar Guitarras</label>
                 <input type="search" id="busqueda" name="q" placeholder="Buscar productos...">
                 <button type="submit">Buscar</button>
             </form>
@@ -31,26 +31,18 @@
             <h2>Filtros</h2>
             <form action="#" method="get">
                 <fieldset>
-                    <legend>Categoría</legend>
-                    <label><input type="checkbox" name="categoria" value="ropa"> Ropa</label>
-                    <label><input type="checkbox" name="categoria" value="accesorios"> Accesorios</label>
-                    <label><input type="checkbox" name="categoria" value="calzado"> Calzado</label>
+                    <legend>Categoria</legend>
+                    <label><input type="checkbox" name="categoria" value="electrica"> Eléctricas</label>
+                    <label><input type="checkbox" name="categoria" value="acustica"> Acústicas y Criollas</label>
+                    <label><input type="checkbox" name="categoria" value="bajo"> Bajos</label>
                 </fieldset>
 
-                <fieldset>
+                <fieldset> <!-- caja contenedor para agrupar campos relacionados -->
                     <legend>Precio</legend>
-                    <label for="precio-min">Mínimo</label>
-                    <input type="number" id="precio-min" name="precio_min" min="0" step="0.01">
-                    <label for="precio-max">Máximo</label>
-                    <input type="number" id="precio-max" name="precio_max" min="0" step="0.01">
-                </fieldset>
-
-                <fieldset>
-                    <legend>Talla</legend>
-                    <label><input type="radio" name="talla" value="s"> S</label>
-                    <label><input type="radio" name="talla" value="m"> M</label>
-                    <label><input type="radio" name="talla" value="l"> L</label>
-                    <label><input type="radio" name="talla" value="xl"> XL</label>
+                    <label for="precio-min">Minimo</label>
+                    <input type="number" id="precio-min" name="precio_min" min="0" step="100">
+                    <label for="precio-max">Maximo</label>
+                    <input type="number" id="precio-max" name="precio_max" min="0" step="100">
                 </fieldset>
 
                 <button type="submit">Aplicar filtros</button>
@@ -59,37 +51,38 @@
         </section>
 
         <section id="destacados">
-            <h2>Productos destacados</h2>
+            
+            <h2>Guitarras destacadas</h2>
 
             <article class="producto">
-                <h3>Producto 1</h3>
-                <p>Descripción breve del producto 1.</p>
-                <p class="precio">$29.99</p>
+                <h3><a href="producto.html">Guitarra Eléctrica Stratocaster</a></h3>
+                <p>Cuerpo de aliso, mástil de arce y 3 micrófonos single-coil.</p>
+                <p class="precio">$850.00</p>
                 <button type="button">Añadir al carrito</button>
             </article>
 
             <article class="producto">
-                <h3>Producto 2</h3>
-                <p>Descripción breve del producto 2.</p>
-                <p class="precio">$49.99</p>
+                <h3><a href="producto.html">Guitarra Electroacústica Dreadnought</a></h3>
+                <p>Tapa de abeto macizo con preamplificador integrado y afinador.</p>
+                <p class="precio">$520.00</p>
                 <button type="button">Añadir al carrito</button>
             </article>
 
             <article class="producto">
-                <h3>Producto 3</h3>
-                <p>Descripción breve del producto 3.</p>
-                <p class="precio">$19.99</p>
+                <h3><a href="producto.html">Bajo Leonard Precision Bass De Estudio</a></h3>
+                <p> Bajo eléctrico tipo Precision 4 cuerdas Cuerpo macizo .</p>
+                <p class="precio">$400.00</p>
                 <button type="button">Añadir al carrito</button>
             </article>
         </section>
 
         <section id="productos">
-            <h2>Todos los productos</h2>
+            <h2>Todos las guitarras</h2>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Cliente Ludmila. Todos los derechos reservados.</p>
+        <p>&copy; 2026 guitarras Ludmila. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
