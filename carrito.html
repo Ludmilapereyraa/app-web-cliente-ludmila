@@ -5,54 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Carrito de compras de Cliente Ludmila">
     <title>Carrito - Cliente Ludmila</title>
-    <style>
-        .visually-hidden {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
-            clip: rect(0 0 0 0);
-            white-space: nowrap;
-        }
-
-        #alternar-vista {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        #vista-productos {
-            display: none;
-        }
-
-        #vista-vacia {
-            display: block;
-        }
-
-        .controles .mostrar-productos {
-            display: inline;
-        }
-
-        .controles .mostrar-vacia {
-            display: none;
-        }
-
-        #alternar-vista:checked ~ #vista-productos {
-            display: block;
-        }
-
-        #alternar-vista:checked ~ #vista-vacia {
-            display: none;
-        }
-
-        #alternar-vista:checked ~ .controles .mostrar-productos {
-            display: none;
-        }
-
-        #alternar-vista:checked ~ .controles .mostrar-vacia {
-            display: inline;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     <header>
@@ -60,104 +14,103 @@
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="index.html#productos">Productos</a></li>
+                <li><a href="somos.html">Quienes somos</a></li>
+                <li><a href="asesoramiento.html">Asesoramiento</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="carrito.html">Carrito</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section id="carrito" aria-labelledby="titulo-carrito">
-            <h1 id="titulo-carrito">Carrito de compras</h1>
+   <main>
+    <section id="carrito" aria-labelledby="titulo-carrito">
+        <h1 id="titulo-carrito">Carrito de compras</h1>
 
-            <p class="nota">Vista de ejemplo: alterná entre el carrito con productos y el carrito vacío con el enlace de abajo.</p>
+        <div id="vista-productos" class="vista-productos">
+            <table>
+                <caption>Detalle de los instrumentos seleccionados</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Precio unitario</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><a href="producto.html">Guitarra Eléctrica Stratocaster</a></th>
+                        <td><data value="850.00">$850.00</data></td>
+                        <td>
+                            <form action="#" method="post">
+                                <label class="visually-hidden" for="cantidad-1">Cantidad de Guitarra Eléctrica Stratocaster</label>
+                                <input type="number" id="cantidad-1" name="cantidad" min="1" max="10" value="1">
+                                <button type="submit">Actualizar</button>
+                            </form>
+                        </td>
+                        <td><data value="850.00">$850.00</data></td>
+                        <td><button type="button">Eliminar</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><a href="producto.html">Guitarra Electroacústica Dreadnought</a></th>
+                        <td><data value="520.00">$520.00</data></td>
+                        <td>
+                            <form action="#" method="post">
+                                <label class="visually-hidden" for="cantidad-2">Cantidad de Guitarra Electroacústica Dreadnought</label>
+                                <input type="number" id="cantidad-2" name="cantidad" min="1" max="10" value="1">
+                                <button type="submit">Actualizar</button>
+                            </form>
+                        </td>
+                        <td><data value="520.00">$520.00</data></td>
+                        <td><button type="button">Eliminar</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><a href="producto.html">Bajo Leonard Precision Bass De Estudio</a></th>
+                        <td><data value="400.00">$400.00</data></td>
+                        <td>
+                            <form action="#" method="post">
+                                <label class="visually-hidden" for="cantidad-3">Cantidad de Bajo Leonard Precision Bass</label>
+                                <input type="number" id="cantidad-3" name="cantidad" min="1" max="10" value="1">
+                                <button type="submit">Actualizar</button>
+                            </form>
+                        </td>
+                        <td><data value="400.00">$400.00</data></td>
+                        <td><button type="button">Eliminar</button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="row" colspan="3">Subtotal</th>
+                        <td colspan="2"><data value="1770.00">$1,770.00</data></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="3">Envío</th>
+                        <td colspan="2">Gratis</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="3">Total</th>
+                        <td colspan="2"><data value="1770.00">$1,770.00</data></td>
+                    </tr>
+                </tfoot>
+            </table>
 
-            <input type="checkbox" id="alternar-vista" name="alternar-vista" checked>
+            <form action="#" method="post">
+                <button type="submit">Finalizar compra</button>
+                <button type="reset">Vaciar carrito</button>
+            </form>
 
-            <div class="controles">
-                <label for="alternar-vista" class="mostrar-productos">Ver carrito con productos</label>
-                <label for="alternar-vista" class="mostrar-vacia">Ver carrito vacío</label>
-            </div>
-
-            <div id="vista-productos" class="vista-productos">
-                <table>
-                    <caption>Detalle de los productos seleccionados</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Talla</th>
-                            <th scope="col">Precio unitario</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Subtotal</th>
-                            <th scope="col">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row"><a href="producto.html">Remera Algodón Pima</a></th>
-                            <td>M</td>
-                            <td><data value="29.99">$29.99</data></td>
-                            <td>
-                                <form action="#" method="post">
-                                    <label class="visually-hidden" for="cantidad-1">Cantidad de Remera Algodón Pima</label>
-                                    <input type="number" id="cantidad-1" name="cantidad" min="1" max="10" value="2">
-                                    <button type="submit">Actualizar</button>
-                                </form>
-                            </td>
-                            <td><data value="59.98">$59.98</data></td>
-                            <td><button type="button">Eliminar</button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><a href="producto.html">Buzo Oversize</a></th>
-                            <td>L</td>
-                            <td><data value="49.99">$49.99</data></td>
-                            <td>
-                                <form action="#" method="post">
-                                    <label class="visually-hidden" for="cantidad-2">Cantidad de Buzo Oversize</label>
-                                    <input type="number" id="cantidad-2" name="cantidad" min="1" max="10" value="1">
-                                    <button type="submit">Actualizar</button>
-                                </form>
-                            </td>
-                            <td><data value="49.99">$49.99</data></td>
-                            <td><button type="button">Eliminar</button></td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th scope="row" colspan="4">Subtotal</th>
-                            <td colspan="2"><data value="109.97">$109.97</data></td>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="4">Envío</th>
-                            <td colspan="2">Gratis</td>
-                        </tr>
-                        <tr>
-                            <th scope="row" colspan="4">Total</th>
-                            <td colspan="2"><data value="109.97">$109.97</data></td>
-                        </tr>
-                    </tfoot>
-                </table>
-
-                <form action="#" method="post">
-                    <button type="submit">Finalizar compra</button>
-                    <button type="reset">Vaciar carrito</button>
-                </form>
-
-                <p><a href="index.html#productos">&larr; Seguir comprando</a></p>
-            </div>
-
-            <div id="vista-vacia" class="vista-vacia">
-                <h2>El carrito de compras está vacío</h2>
-                <p>No hay productos en tu carrito en este momento. Explorá nuestro catálogo y agregá lo que te guste.</p>
-                <p><a href="index.html#productos">Explorar productos</a></p>
-            </div>
-        </section>
-    </main>
+            <p><a href="index.html#productos">&larr; Seguir comprando</a></p>
+        </div>
+    </section>
+</main>
 
     <footer>
         <nav aria-label="Navegación secundaria">
             <ul>
                 <li><a href="index.html">Inicio</a></li>
+                <li><a href="somos.html">Quienes somos</a></li>
+                <li><a href="asesoramiento.html">Asesoramiento</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="carrito.html">Carrito</a></li>
             </ul>

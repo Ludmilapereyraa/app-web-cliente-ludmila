@@ -1,0 +1,789 @@
+:root {
+    --negro: #0e0b09;
+    --grafito: #171412;
+    --carbon: #211d1a;
+    --sepia: #2a241e;
+    --gris-metal: #8d857c;
+    --marron-oscuro: #38271a;
+    --marron: #6f4a2b;
+    --marron-claro: #a5774e;
+    --rojo-oscuro: #661d19;
+    --rojo: #922112;
+    --rojo-claro: #d74a33;
+    --crema: #f1e7d9;
+    --borde: #3b332c;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.top-banner {
+  background-color: #500000; /* Rojo borra de vino / industrial oscuro */
+  color: #f0f0f0;
+  text-align: center;
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #700000;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--grafito);
+    color: var(--crema);
+    line-height: 1.55;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: var(--rojo-claro);
+}
+
+a:hover {
+    color: var(--rojo-claro);
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+}
+
+h1 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+}
+
+h2 {
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+    border-bottom: 2px solid var(--rojo);
+    padding-bottom: 0.4rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
+header {
+    background: var(--negro);
+    border-bottom: 4px solid var(--rojo);
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+ nav {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: -50px; 
+    margin-bottom: 1rem;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--marron-oscuro);
+    color: var(--crema);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.82rem;
+}
+
+nav a[aria-current="page"] {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    color: var(--negro);
+}
+
+nav a:hover {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    color: var(--negro);
+    text-decoration: none;
+}
+
+.buscador {
+    display: flex;
+    justify-content: flex-end; 
+    width: 100%;
+    margin-bottom: 1rem;      
+}
+
+.buscador form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;        /* Se adapta al tamaño del input + botón */
+}
+
+.buscador label {
+    display: none;             
+}
+
+.buscador input {
+    width: 220px;              
+}
+
+button {
+    background: var(--rojo);
+    color: var(--negro);
+    border: 1px solid var(--rojo-oscuro);
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: var(--rojo-claro);
+}
+
+button[type="reset"] {
+    background: transparent;
+    color: var(--rojo-claro);
+    border-color: var(--marron);
+}
+
+button[type="reset"]:hover {
+    background: var(--rojo-claro);
+    color: var(--negro);
+}
+
+input, select, textarea {
+    font: inherit;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+    background: var(--carbon);
+    border: 1px solid var(--borde);
+    color: var(--crema);
+    padding: 0.5rem 0.6rem;
+    width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 2px solid var(--rojo-claro);
+    outline-offset: 1px;
+    border-color: var(--rojo-claro);
+}
+
+::placeholder {
+    color: var(--gris-metal);
+}
+
+main {
+    padding: 1.5rem 1rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+fieldset {
+    border: 1px solid var(--marron-oscuro);
+    padding: 1rem;
+    margin: 0 0 1rem;
+}
+
+legend {
+    color: var(--rojo-claro);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    padding: 0 0.4rem;
+}
+
+#filtros {
+    background: var(--negro);
+    border: 1px solid var(--borde);
+    padding: 1rem;
+    position: relative;
+    z-index: 30;
+}
+
+#filtros label {
+    font-size: 0.85rem;
+}
+
+#destacados,
+#productos,
+#relacionados {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+#destacados h2,
+#productos h2,
+#relacionados h2 {
+    grid-column: 1 / -1;
+}
+
+.producto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: var(--negro);
+    border: 1px solid var(--borde);
+    border-top: 3px solid var(--rojo);
+    padding-bottom: 1rem;
+}
+
+.producto:hover {
+    border-color: var(--marron-claro);
+}
+
+.producto img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.producto h3 {
+    margin: 0.75rem 1rem 0;
+    font-size: 0.92rem;
+}
+
+.producto h3 a {
+    color: var(--crema);
+}
+
+.producto h3 a:hover {
+    color: var(--rojo-claro);
+}
+
+.producto p {
+    margin: 0.1rem 1rem;
+    font-size: 0.86rem;
+    color: var(--gris-metal);
+}
+
+.producto .precio {
+    margin-top: auto;
+    color: var(--rojo-claro);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+}
+
+.producto button {
+    align-self: flex-start;
+    margin: 0.35rem 1rem 0;
+}
+
+#detalle-producto {
+    max-width: 900px;
+}
+
+#detalle-producto img {
+    width: 100%;
+    max-width: 480px;
+    border: 1px solid var(--borde);
+}
+
+#detalle-producto form div {
+    max-width: 240px;
+    margin-bottom: 0.75rem;
+}
+
+#detalle-producto form label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--gris-metal);
+    margin-bottom: 0.25rem;
+}
+
+main nav[aria-label="Miga de pan"] ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+    font-size: 0.82rem;
+}
+
+main nav[aria-label="Miga de pan"] li {
+    color: var(--gris-metal);
+}
+
+main nav[aria-label="Miga de pan"] li + li::before {
+    content: "/";
+    margin-right: 0.4rem;
+    color: var(--rojo-claro);
+}
+
+main nav[aria-label="Miga de pan"] a {
+    border: 0;
+    padding: 0;
+    color: var(--crema);
+}
+
+main nav[aria-label="Miga de pan"] a[aria-current="page"],
+main nav[aria-label="Miga de pan"] a[aria-current="page"]:hover {
+    background: none;
+    border: 0;
+    color: var(--rojo-claro);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+caption {
+    text-align: left;
+    padding: 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rojo-claro);
+    font-size: 0.8rem;
+}
+
+th, td {
+    border: 1px solid var(--borde);
+    padding: 0.5rem 0.65rem;
+    text-align: left;
+}
+
+thead th {
+    background: var(--carbon);
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+}
+
+tbody th {
+    color: var(--gris-metal);
+    font-weight: 600;
+}
+
+tfoot th {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+}
+
+tfoot tr:last-child th,
+tfoot tr:last-child td {
+    border-top: 2px solid var(--rojo);
+    color: var(--rojo-claro);
+    font-weight: 700;
+}
+
+.controles {
+    margin: 1rem 0;
+}
+
+.controles label {
+    display: inline-block;
+    border: 1px solid var(--marron-claro);
+    color: var(--marron-claro);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+}
+
+.vista-productos {
+    overflow-x: auto;
+}
+
+.vista-productos table {
+    min-width: 640px;
+}
+
+.vista-vacia {
+    text-align: center;
+    padding: 2rem 1rem;
+    border: 1px dashed var(--borde);
+}
+
+#asesoramiento {
+    max-width: 900px;
+}
+
+#asesoramiento .intro {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+}
+
+.servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.servicio-card {
+    background: var(--negro);
+    border: 1px solid var(--borde);
+    border-top: 3px solid var(--rojo);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.servicio-card h2 {
+    border-bottom: 0;
+    margin: 0;
+}
+
+.servicio-card p {
+    font-size: 0.92rem;
+    color: var(--crema);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.cta-texto {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--gris-metal);
+}
+
+.btn-whatsapp {
+    display: inline-block;
+    background: #25d366;
+    color: var(--negro);
+    border: 1px solid #1da851;
+    padding: 0.85rem 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-whatsapp:hover {
+    background: #1da851;
+    color: var(--negro);
+}
+
+#asesoramiento p:not(.intro):not(.cta-texto) {
+    font-size: 0.92rem;
+}
+
+#quienes-somos {
+    max-width: 760px;
+}
+
+#quienes-somos p {
+    margin-bottom: 1rem;
+    font-size: 1.02rem;
+    color: var(--crema);
+}
+
+#quienes-somos p::first-letter {
+    color: var(--rojo-claro);
+}
+
+#contacto form {
+    max-width: 760px;
+}
+
+#contacto fieldset > div {
+    margin-bottom: 0.75rem;
+}
+
+#contacto fieldset label span {
+    color: var(--rojo-claro);
+}
+
+#datos-contacto address {
+    border-left: 3px solid var(--rojo);
+    background: var(--negro);
+    padding: 1rem;
+    font-style: normal;
+}
+
+address p {
+    margin: 0 0 0.35rem;
+}
+
+/* Posicionamiento para la tarjeta y el badge */
+.card {
+  position: relative; /* Necesario para ubicar el badge dentro de la tarjeta */
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--color-primario, #8b0000); /* Tu rojo de variable */
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+/* EFECTO ZOOM EN LA FOTO */
+.card-img-container {
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  transition: transform 0.3s ease; /* Transición suave */
+}
+
+/* Al pasar el mouse, la guitarra se agranda un poco */
+.card:hover img {
+  transform: scale(1.08);
+}
+
+/* Seccion de Reseñas */
+#resenas {
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+}
+
+#resenas h2 {
+  margin-bottom: 1rem;
+}
+
+.resenas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.resena-card {
+  background: var(--negro);
+  border: 1px solid var(--borde);
+  border-top: 3px solid var(--rojo);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.resena-card .estrellas {
+  color: var(--rojo-claro);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+
+.resena-card p {
+  font-size: 0.88rem;
+  color: var(--crema);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.resena-card span {
+  font-size: 0.8rem;
+  color: var(--gris-metal);
+  font-weight: bold;
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+
+/* El contenedor principal actúa como Carrusel */
+/* Sección de RESEÑAS */
+#resenas {
+    grid-column: 1 / -1;
+  margin-top: 3rem;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+#resenas h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* Envoltorio para centrar el carrusel en la pantalla */
+.resenas-wrapper {
+  max-width: 1000px; /* Ajusta el ancho total del carrusel */
+  margin: 0 auto;    /* Lo centra en la página */
+  padding: 0 1rem;
+}
+
+/* El carrusel que muestra 3 tarjetas alineadas */
+.resenas-grid {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+}
+
+/* Cálculo exacto para mostrar 3 tarjetas visibles a la vez */
+.resena-card {
+  /* Resta los gaps para que encajen justo 3 por fila */
+  flex: 0 0 calc((100% - 2rem) / 3); 
+  scroll-snap-align: start;
+  background: var(--negro);
+  border: 1px solid var(--borde);
+  border-top: 3px solid var(--rojo);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.resena-card .estrellas {
+  color: var(--rojo-claro);
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.resena-card p {
+  font-size: 0.85rem;
+  color: var(--crema);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.resena-card span {
+  font-size: 0.78rem;
+  color: var(--gris-metal);
+  font-weight: bold;
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+/* barra de scroll */
+.resenas-grid::-webkit-scrollbar {
+  height: 6px;
+}
+.resenas-grid::-webkit-scrollbar-thumb {
+  background: var(--rojo);
+  border-radius: 3px;
+}
+.resenas-grid::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+/* Fin de la sección de RESEÑAS */
+
+footer {
+    background: var(--negro);
+    border-top: 4px solid var(--rojo);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--gris-metal);
+}
+
+@media (min-width: 900px) {
+    header {
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    header nav {
+        justify-content: flex-start;
+        flex: 1;
+    }
+
+    .buscador {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    main:has(#filtros) {
+        display: grid;
+        grid-template-columns: minmax(220px, 280px) 1fr;
+        gap: 1.5rem;
+        grid-template-areas:
+            "filtros destacados"
+            "filtros productos";
+        align-items: start;
+    }
+
+    main:has(#filtros) > #filtros {
+        grid-area: filtros;
+        position: sticky;
+        top: 1rem;
+    }
+
+    main:has(#filtros) > #destacados {
+        grid-area: destacados;
+    }
+
+    main:has(#filtros) > #productos {
+        grid-area: productos;
+    }
+}
+@media (max-width: 720px) {
+    main {
+        padding: 1rem 0.75rem 2.5rem;
+    }
+
+    header nav ul {
+        justify-content: center;
+    }
+
+    /* Achicamos la caja para que entre bien en celulares sin ponerse en vertical */
+    .buscador input {
+        width: 140px;
+    }
+
+    .producto img {
+        height: 170px;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 0.75rem 0.5rem 2rem;
+    }
+
+    .buscador input {
+        width: 110px; /* Un toque más angosto en pantallas muy chicas */
+    }
+
+    .producto button {
+        width: calc(100% - 2rem);
+    }
+}
