@@ -1,3 +1,4 @@
+/* VARIABLES DE COLOR Y RESET GENERAL */
 :root {
     --negro: #0e0b09;
     --grafito: #171412;
@@ -20,22 +21,16 @@
     box-sizing: border-box;
 }
 
-.top-banner {
-  background-color: #500000; /* Rojo borra de vino / industrial oscuro */
-  color: #f0f0f0;
-  text-align: center;
-  padding: 0.4rem 1rem;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  border-bottom: 1px solid #700000;
-}
-
 body {
     margin: 0;
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
     background: var(--grafito);
     color: var(--crema);
     line-height: 1.55;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 img {
@@ -51,6 +46,9 @@ a:hover {
     color: var(--rojo-claro);
 }
 
+/* ==========================================================================
+   2. TIPOGRAFÍA ENCABEZADOS
+   ========================================================================== */
 h1, h2, h3 {
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -73,6 +71,18 @@ h3 {
     font-size: 1rem;
 }
 
+/* Banner superior */
+.top-banner {
+    background-color: #500000;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #700000;
+}
+
+/* ENCABEZADO */
 header {
     background: var(--negro);
     border-bottom: 4px solid var(--rojo);
@@ -82,13 +92,14 @@ header {
     gap: 0.5rem;
 }
 
- nav {
+
+
+/* MÉNU */
+nav {
     display: flex;
-    justify-content: left;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: -50px; 
-    margin-bottom: 1rem;
+    align-items: self-start ;
+    z-index: 10; /* Asegura que el menú quede por encima y reciba los clics */
+    margin: 0;
 }
 
 nav ul {
@@ -108,14 +119,10 @@ nav a {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: 0.82rem;
+    text-decoration: none;
 }
 
-nav a[aria-current="page"] {
-    background: var(--rojo);
-    border-color: var(--rojo);
-    color: var(--negro);
-}
-
+nav a[aria-current="page"],
 nav a:hover {
     background: var(--rojo);
     border-color: var(--rojo);
@@ -123,18 +130,21 @@ nav a:hover {
     text-decoration: none;
 }
 
+/* Buscador en la barra superior */
 .buscador {
     display: flex;
-    justify-content: flex-end; 
-    width: 100%;
-    margin-bottom: 1rem;      
+    justify-content: flex-end; /* Lo manda al extremo derecho */
+    width: auto;
+    margin-left: auto;
+    margin-top: -2.3rem; /*  altura */
+    position: relative;
+    z-index: 5;
 }
 
 .buscador form {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    width: fit-content;        /* Se adapta al tamaño del input + botón */
 }
 
 .buscador label {
@@ -145,6 +155,9 @@ nav a:hover {
     width: 220px;              
 }
 
+/* __________________________________________________
+   4. FORMULARIOS, BOTONES E INPUTS
+   __________________________________________________ */
 button {
     background: var(--rojo);
     color: var(--negro);
@@ -200,12 +213,6 @@ input:focus, select:focus, textarea:focus {
     color: var(--gris-metal);
 }
 
-main {
-    padding: 1.5rem 1rem 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 fieldset {
     border: 1px solid var(--marron-oscuro);
     padding: 1rem;
@@ -220,11 +227,22 @@ legend {
     padding: 0 0.4rem;
 }
 
+/* _________________________________
+   5. ESTRUCTURA MAIN Y  FILTROS
+   ________________________________ */
+main {
+    padding: 1.5rem 1rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+/* Estilos de la caja del Filtro */
 #filtros {
     background: var(--negro);
     border: 1px solid var(--borde);
     padding: 1rem;
-    position: relative;
+    position: static;
     z-index: 30;
 }
 
@@ -232,6 +250,7 @@ legend {
     font-size: 0.85rem;
 }
 
+/* Grillas del catálogo */
 #destacados,
 #productos,
 #relacionados {
@@ -246,6 +265,7 @@ legend {
     grid-column: 1 / -1;
 }
 
+/* Componente de Producto (Card) */
 .producto {
     display: flex;
     flex-direction: column;
@@ -298,6 +318,10 @@ legend {
     margin: 0.35rem 1rem 0;
 }
 
+/* ________________________________________________
+   6. VISTAS ESPECÍFICAS (Detalle, , Tablas, Servicios, Sobre Nosotros)
+   _______________________________________________________________ */
+/* Detalle de Producto */
 #detalle-producto {
     max-width: 900px;
 }
@@ -322,6 +346,7 @@ legend {
     margin-bottom: 0.25rem;
 }
 
+/* Miga de Pan (Breadcrumbs) */
 main nav[aria-label="Miga de pan"] ol {
     display: flex;
     flex-wrap: wrap;
@@ -355,6 +380,7 @@ main nav[aria-label="Miga de pan"] a[aria-current="page"]:hover {
     color: var(--rojo-claro);
 }
 
+/* Tablas y Carrito */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -430,6 +456,7 @@ tfoot tr:last-child td {
     border: 1px dashed var(--borde);
 }
 
+/* Sección Asesoramiento y Servicios */
 #asesoramiento {
     max-width: 900px;
 }
@@ -497,6 +524,7 @@ tfoot tr:last-child td {
     font-size: 0.92rem;
 }
 
+/* Quienes Somos y Contacto */
 #quienes-somos {
     max-width: 760px;
 }
@@ -534,172 +562,120 @@ address p {
     margin: 0 0 0.35rem;
 }
 
-/* Posicionamiento para la tarjeta y el badge */
+/* Tarjeta alternativa con Badge y Efecto Zoom */
 .card {
-  position: relative; /* Necesario para ubicar el badge dentro de la tarjeta */
-  overflow: hidden;
-  padding: 1rem;
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
 }
 
 .badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: var(--color-primario, #8b0000); /* Tu rojo de variable */
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: bold;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  z-index: 1;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--color-primario, #8b0000);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    z-index: 1;
 }
 
-/* EFECTO ZOOM EN LA FOTO */
 .card-img-container {
-  overflow: hidden;
-  border-radius: 4px;
+    overflow: hidden;
+    border-radius: 4px;
 }
 
 .card img {
-  width: 100%;
-  height: 250px;
-  transition: transform 0.3s ease; /* Transición suave */
+    width: 100%;
+    height: 250px;
+    transition: transform 0.3s ease;
 }
 
-/* Al pasar el mouse, la guitarra se agranda un poco */
 .card:hover img {
-  transform: scale(1.08);
+    transform: scale(1.08);
 }
 
-/* Seccion de Reseñas */
-#resenas {
-  margin-top: 2rem;
-  padding: 1.5rem 0;
-}
-
-#resenas h2 {
-  margin-bottom: 1rem;
-}
-
-.resenas-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
-}
-
-.resena-card {
-  background: var(--negro);
-  border: 1px solid var(--borde);
-  border-top: 3px solid var(--rojo);
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.resena-card .estrellas {
-  color: var(--rojo-claro);
-  font-size: 1.1rem;
-  letter-spacing: 2px;
-}
-
-.resena-card p {
-  font-size: 0.88rem;
-  color: var(--crema);
-  font-style: italic;
-  line-height: 1.4;
-  margin: 0;
-}
-
-.resena-card span {
-  font-size: 0.8rem;
-  color: var(--gris-metal);
-  font-weight: bold;
-  margin-top: auto;
-  align-self: flex-end;
-}
-
-
-/* El contenedor principal actúa como Carrusel */
-/* Sección de RESEÑAS */
+/* ______________________________________________
+   7. SECCIÓN DE RESEÑAS (Carrusel horizontal con Snap Scroll)
+   _________________________________________________ */
 #resenas {
     grid-column: 1 / -1;
-  margin-top: 3rem;
-  padding: 2rem 0;
-  text-align: center;
+    margin-top: 3rem;
+    padding: 2rem 0;
+    text-align: center;
 }
 
 #resenas h2 {
-  margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
-/* Envoltorio para centrar el carrusel en la pantalla */
 .resenas-wrapper {
-  max-width: 1000px; /* Ajusta el ancho total del carrusel */
-  margin: 0 auto;    /* Lo centra en la página */
-  padding: 0 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
-/* El carrusel que muestra 3 tarjetas alineadas */
 .resenas-grid {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
 }
 
-/* Cálculo exacto para mostrar 3 tarjetas visibles a la vez */
 .resena-card {
-  /* Resta los gaps para que encajen justo 3 por fila */
-  flex: 0 0 calc((100% - 2rem) / 3); 
-  scroll-snap-align: start;
-  background: var(--negro);
-  border: 1px solid var(--borde);
-  border-top: 3px solid var(--rojo);
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  box-sizing: border-box;
-  text-align: left;
+    flex: 0 0 calc((100% - 2rem) / 3); 
+    scroll-snap-align: start;
+    background: var(--negro);
+    border: 1px solid var(--borde);
+    border-top: 3px solid var(--rojo);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    text-align: left;
 }
 
 .resena-card .estrellas {
-  color: var(--rojo-claro);
-  font-size: 1rem;
-  letter-spacing: 2px;
+    color: var(--rojo-claro);
+    font-size: 1rem;
+    letter-spacing: 2px;
 }
 
 .resena-card p {
-  font-size: 0.85rem;
-  color: var(--crema);
-  font-style: italic;
-  line-height: 1.4;
-  margin: 0;
+    font-size: 0.85rem;
+    color: var(--crema);
+    font-style: italic;
+    line-height: 1.4;
+    margin: 0;
 }
 
 .resena-card span {
-  font-size: 0.78rem;
-  color: var(--gris-metal);
-  font-weight: bold;
-  margin-top: auto;
-  align-self: flex-end;
+    font-size: 0.78rem;
+    color: var(--gris-metal);
+    font-weight: bold;
+    margin-top: auto;
+    align-self: flex-end;
 }
 
-/* barra de scroll */
+/* Estilización personalizada de la barra de scroll */
 .resenas-grid::-webkit-scrollbar {
-  height: 6px;
+    height: 6px;
 }
 .resenas-grid::-webkit-scrollbar-thumb {
-  background: var(--rojo);
-  border-radius: 3px;
+    background: var(--rojo);
+    border-radius: 3px;
 }
 .resenas-grid::-webkit-scrollbar-track {
-  background: #1e1e1e;
+    background: #1e1e1e;
 }
-/* Fin de la sección de RESEÑAS */
 
+/*__________________________________
+   8. PIE DE PÁGINA (Footer)
+   ________________________________ */
 footer {
     background: var(--negro);
     border-top: 4px solid var(--rojo);
@@ -713,6 +689,11 @@ footer {
     color: var(--gris-metal);
 }
 
+/* ________________________________________________
+   9. MEDIA QUERIES (Diseño Adaptativo / Responsive)
+   ______________________________________________________ */
+
+/* Escritorio / Pantallas Grandes (>= 900px) */
 @media (min-width: 900px) {
     header {
         flex-direction: row;
@@ -731,6 +712,7 @@ footer {
         justify-content: flex-end;
     }
 
+    /* Maquetación del Main con Grid de 2 columnas usando grid-template-areas */
     main:has(#filtros) {
         display: grid;
         grid-template-columns: minmax(220px, 280px) 1fr;
@@ -743,8 +725,7 @@ footer {
 
     main:has(#filtros) > #filtros {
         grid-area: filtros;
-        position: sticky;
-        top: 1rem;
+        position: static;
     }
 
     main:has(#filtros) > #destacados {
@@ -755,6 +736,8 @@ footer {
         grid-area: productos;
     }
 }
+
+/* Tablets (<= 720px) */
 @media (max-width: 720px) {
     main {
         padding: 1rem 0.75rem 2.5rem;
@@ -764,7 +747,6 @@ footer {
         justify-content: center;
     }
 
-    /* Achicamos la caja para que entre bien en celulares sin ponerse en vertical */
     .buscador input {
         width: 140px;
     }
@@ -772,18 +754,27 @@ footer {
     .producto img {
         height: 170px;
     }
+
+    .resena-card {
+        flex: 0 0 calc((100% - 1rem) / 2); /* Muestra 2 tarjetas en tablets */
+    }
 }
 
+/* Celulares (<= 480px) */
 @media (max-width: 480px) {
     main {
         padding: 0.75rem 0.5rem 2rem;
     }
 
     .buscador input {
-        width: 110px; /* Un toque más angosto en pantallas muy chicas */
+        width: 110px;
     }
 
     .producto button {
         width: calc(100% - 2rem);
+    }
+
+    .resena-card {
+        flex: 0 0 100%; /* Muestra 1 tarjeta a la vez en móviles */
     }
 }
