@@ -1,5 +1,5 @@
-# Sitio web en Netfily:
-https://earnest-tiramisu-5239ec.netlify.app/
+# Github Pages:
+ https://ludmilapereyraa.github.io/app-web-cliente-ludmila/
 
 
 # Cómo usar el repositorio template
