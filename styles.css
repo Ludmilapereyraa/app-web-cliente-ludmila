@@ -30,12 +30,12 @@ body {
 
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* de aca para arriba, se estira automáticamente */
 }
 
 img {
     max-width: 100%;
-    display: block;
+    display: block; /*sin espacios libres abajo*/
 }
 
 a {
@@ -43,28 +43,28 @@ a {
 }
 
 a:hover {
-    color: var(--rojo-claro);
+    color: var(--rojo-claro); 
 }
 
-/* ==========================================================================
+/* ____________________________
    2. TIPOGRAFÍA ENCABEZADOS
-   ========================================================================== */
+   ______________________________ */
 h1, h2, h3 {
-    text-transform: uppercase;
+    text-transform: uppercase;  /*mayuscula*/
     letter-spacing: 0.1em;
     font-weight: 700;
 }
 
 h1 {
-    margin: 0 0 0.75rem;
-    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    margin: 0 0 0.75rem; /* arriba, lados, empuja abajo*/
+    font-size: clamp(1.6rem, 4vw, 2.3rem); /*segun la pantalla */
 }
 
 h2 {
     margin: 0 0 1rem;
     font-size: 1.05rem;
     border-bottom: 2px solid var(--rojo);
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.4rem; /* estira el espacio solo de abajo, aire*/
 }
 
 h3 {
@@ -79,7 +79,7 @@ h3 {
     padding: 0.4rem 1rem;
     font-size: 0.8rem;
     letter-spacing: 1px;
-    border-bottom: 1px solid #700000;
+    border-bottom: 1px solid #700000; /* dibuja una linea*/
 }
 
 /* ENCABEZADO */
@@ -92,20 +92,29 @@ header {
     gap: 0.5rem;
 }
 
+/*___________________________
+  CAJA CONTENEDORA 
+   _______________________________ */
+.barra-navegacion {
+    display: flex;
+    justify-content: space-between; /* Menú a la izquierda, buscador a la derecha */
+    align-items: center;            
+    padding: 0.5rem 1rem;          
+}
 
-
-/* MÉNU */
+/* _______________________
+   EL MENÚ 
+   ___________________*/
 nav {
     display: flex;
-    align-items: self-start ;
-    z-index: 10; /* Asegura que el menú quede por encima y reciba los clics */
+    z-index: 10; 
     margin: 0;
 }
 
 nav ul {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
+    flex-wrap: wrap; /* pantalla chiquita = orden*/
+    gap: 0.4rem; 
     list-style: none;
     margin: 0;
     padding: 0;
@@ -119,7 +128,7 @@ nav a {
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: 0.82rem;
-    text-decoration: none;
+    text-decoration: none; /* sin subrayado azul*/
 }
 
 nav a[aria-current="page"],
@@ -130,13 +139,12 @@ nav a:hover {
     text-decoration: none;
 }
 
-/* Buscador en la barra superior */
+/* _______________________________________
+    BUSCADOR
+   ________________________ */
 .buscador {
     display: flex;
-    justify-content: flex-end; /* Lo manda al extremo derecho */
     width: auto;
-    margin-left: auto;
-    margin-top: -2.3rem; /*  altura */
     position: relative;
     z-index: 5;
 }
@@ -156,7 +164,7 @@ nav a:hover {
 }
 
 /* __________________________________________________
-   4. FORMULARIOS, BOTONES E INPUTS
+   FORMULARIOS, BOTONES E INPUTS
    __________________________________________________ */
 button {
     background: var(--rojo);
@@ -361,7 +369,7 @@ main nav[aria-label="Miga de pan"] li {
     color: var(--gris-metal);
 }
 
-main nav[aria-label="Miga de pan"] li + li::before {
+main nav[aria-label="Miga de pan"] li + li::before {  /*saltea al primero y le pone un adorno falso*/ 
     content: "/";
     margin-right: 0.4rem;
     color: var(--rojo-claro);
@@ -565,7 +573,7 @@ address p {
 /* Tarjeta alternativa con Badge y Efecto Zoom */
 .card {
     position: relative;
-    overflow: hidden;
+    overflow: hidden;  /*recorta los bordes*/
     padding: 1rem;
 }
 
@@ -590,7 +598,7 @@ address p {
 .card img {
     width: 100%;
     height: 250px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease; 
 }
 
 .card:hover img {
@@ -598,7 +606,7 @@ address p {
 }
 
 /* ______________________________________________
-   7. SECCIÓN DE RESEÑAS (Carrusel horizontal con Snap Scroll)
+   SECCIÓN DE RESEÑAS
    _________________________________________________ */
 #resenas {
     grid-column: 1 / -1;
