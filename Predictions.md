@@ -24,8 +24,12 @@ filter, map y reduce en lugar de un for clásico. Lo voy a probar en la consola
 con console.table.
 
 6. ## Predicción
-Espero que OpenCode use el array de js/catalogo.js para generar las cards de
+Qiero que OpenCode use el array de js/catalogo.js para generar las cards de
 la sección "Todas las guitarras" con createElement y append, sin innerHTML.
 Espero que cada card muestre imagen, nombre y precio con la función precio(),
 y que el producto con stock 0 muestre el botón deshabilitado. Ademas quiero
 que me diga que borre las cards escritas a mano en index.html.
+
+7. ## Prediccióm
+Me gustario que OpenCode me avise que si cuando completo el formulario, me avise si el email esta mal y que cuando el cliente toque el boton de "suscribirme" con los campos vacios, el formulario no se envíe. 
+Al igual que si el email o formulario estan bien, no aparezco un error. 

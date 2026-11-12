@@ -223,6 +223,19 @@ input:focus, select:focus, textarea:focus {
     border-color: var(--rojo-claro);
 }
 
+.error {
+    display: block;
+    margin-top: 0.35rem;
+    color: var(--rojo-claro);
+    font-size: 0.85rem;
+}
+
+.exito {
+    margin-top: 0.75rem;
+    color: var(--crema);
+    font-weight: 600;
+}
+
 ::placeholder {
     color: var(--gris-metal);
 }
