@@ -14,3 +14,11 @@ links y el botón del newsletter, y que al hacer clic en un link del menú le
 agregue la clase "activa" y se la quite a los demás con classList. Espero
 también que cree los mensajes de error con createElement y textContent (no
 innerHTML), y que use un solo listener para los botones "Añadir al carrito"
+
+5. ## Predicción
+Espero que OpenCode cree un archivo js/catalogo.js con un array de 6 productos
+(id, nombre, precio, stock) usando const. Espero una función flecha precio(n)
+que devuelva un string con formato "$ 1.234", la separación de productos
+disponibles y agotados con if/else, y el cálculo del total con IVA usando
+filter, map y reduce en lugar de un for clásico. Lo voy a probar en la consola
+con console.table.
