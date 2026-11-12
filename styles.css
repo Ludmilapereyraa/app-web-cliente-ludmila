@@ -483,6 +483,24 @@ tfoot tr:last-child td {
     border: 1px dashed var(--borde);
 }
 
+.acciones-carrito {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.eliminar-producto {
+    background: transparent;
+    color: var(--rojo-claro);
+    border-color: var(--marron);
+}
+
+.eliminar-producto:hover {
+    background: var(--rojo-claro);
+    color: var(--negro);
+}
+
 /* Sección Asesoramiento y Servicios */
 #asesoramiento {
     max-width: 900px;
@@ -644,6 +662,32 @@ address p {
 
 .card button {
     align-self: flex-start;
+}
+
+.mensaje-carrito {
+    margin-bottom: 1rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--carbon);
+    border-left: 3px solid var(--rojo-claro);
+    color: var(--crema);
+}
+
+.mensaje-carrito:empty {
+    display: none;
+}
+
+.contador-carrito {
+    display: inline-block;
+    min-width: 1.25rem;
+    margin-left: 0.35rem;
+    padding: 0 0.35rem;
+    background: var(--rojo);
+    border-radius: 999px;
+    color: var(--crema);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.25rem;
+    text-align: center;
 }
 
 button:disabled {
