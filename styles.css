@@ -483,6 +483,24 @@ tfoot tr:last-child td {
     border: 1px dashed var(--borde);
 }
 
+.acciones-carrito {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.eliminar-producto {
+    background: transparent;
+    color: var(--rojo-claro);
+    border-color: var(--marron);
+}
+
+.eliminar-producto:hover {
+    background: var(--rojo-claro);
+    color: var(--negro);
+}
+
 /* Sección Asesoramiento y Servicios */
 #asesoramiento {
     max-width: 900px;
