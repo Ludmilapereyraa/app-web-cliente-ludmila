@@ -611,6 +611,35 @@ address p {
     transform: scale(1.08);
 }
 
+/* Cards de "Todas las guitarras" */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--negro);
+    border: 1px solid var(--borde);
+    border-top: 3px solid var(--rojo);
+}
+
+.card .precio {
+    display: block;
+    margin-top: auto;
+    color: var(--rojo-claro);
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.card button {
+    align-self: flex-start;
+}
+
+button:disabled {
+    background: var(--carbon);
+    color: var(--gris-metal);
+    border-color: var(--borde);
+    cursor: not-allowed;
+}
+
 /* ______________________________________________
    SECCIÓN DE RESEÑAS
    _________________________________________________ */
