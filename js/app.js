@@ -59,3 +59,58 @@ if (formularioNewsletter) {
         });
     }
 }
+
+const seccionesProductos = [
+    document.querySelector('#destacados'),
+    document.querySelector('#productos')
+].filter(Boolean);
+
+if (seccionesProductos.length > 0 && typeof productos !== 'undefined') {
+    const linkCarrito = document.querySelector('a[href="carrito.html"]');
+    let cantidadCarrito = 0;
+    let contadorCarrito = null;
+
+    const mensajeCarrito = document.createElement('p');
+    mensajeCarrito.classList.add('mensaje-carrito');
+    mensajeCarrito.setAttribute('aria-live', 'polite');
+    seccionesProductos[0].insertAdjacentElement('beforebegin', mensajeCarrito);
+
+    if (linkCarrito) {
+        contadorCarrito = document.createElement('span');
+        contadorCarrito.classList.add('contador-carrito');
+        contadorCarrito.textContent = cantidadCarrito;
+        linkCarrito.appendChild(contadorCarrito);
+    }
+
+    const agregarAlCarrito = (evento) => {
+        const boton = evento.target.closest('button');
+
+        if (!boton) {
+            return;
+        }
+
+        const tarjeta = boton.closest('.card, .producto');
+
+        if (!tarjeta) {
+            return;
+        }
+
+        const id = Number(tarjeta.dataset.id);
+        const producto = productos.find((item) => item.id === id);
+
+        if (!producto) {
+            return;
+        }
+
+        mensajeCarrito.textContent = `Agregaste ${producto.nombre} al carrito`;
+
+        if (contadorCarrito) {
+            cantidadCarrito += 1;
+            contadorCarrito.textContent = cantidadCarrito;
+        }
+    };
+
+    seccionesProductos.forEach((seccion) => {
+        seccion.addEventListener('click', agregarAlCarrito);
+    });
+}
