@@ -139,6 +139,12 @@ nav a:hover {
     text-decoration: none;
 }
 
+nav a.activa {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    color: var(--crema);
+}
+
 /* _______________________________________
     BUSCADOR
    ________________________ */
