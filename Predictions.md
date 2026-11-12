@@ -36,3 +36,7 @@ Al igual que si el email o formulario estan bien, no aparezco un error.
 
 8. ## Predicción
 Me gustaria que OpenCode pudiera poner un solo listener en el contenedor de guitarra. Y que cuando se presione "añadir al carrito" en cualquier guitarra, aparezca en la pagina un mensaje con el nombre de ese producto y que el contador del carrito suba de a uno a uno. Ademas me gustaria que el boton de "Sin stock" no haga nada en mi pagina.
+
+9. ## Predicción
+Deseo que OpenCode pueda hacer que los filtros de mi pagina funcionen de verdad, que al marcar una "marca" o "categoria" o precio de min o max, demuestre que funciona aplicando a las guitarras que cumplan con la condicion. 
+Ademas que el boton de "limpiar filtros" funcione y que si  no hay ningun producto que haga una especie de match, que muestre un mensaje avisando al usuario. El buscador igual tiene que cumplir su función de que si un usario escribe el nombre del producto que desea, este lo detecte y lo muestre en pantalla.

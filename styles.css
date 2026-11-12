@@ -145,6 +145,32 @@ nav a.activa {
     color: var(--crema);
 }
 
+/* Botón de menú para celulares */
+.boton-menu {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    padding: 0.4rem 0.65rem;
+    background: transparent;
+    border: 1px solid var(--marron-oscuro);
+    color: var(--crema);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.boton-menu:hover {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    color: var(--negro);
+}
+
+.boton-menu:focus-visible {
+    outline: 2px solid var(--rojo-claro);
+    outline-offset: 2px;
+}
+
 /* _______________________________________
     BUSCADOR
    ________________________ */
@@ -481,6 +507,14 @@ tfoot tr:last-child td {
     text-align: center;
     padding: 2rem 1rem;
     border: 1px dashed var(--borde);
+}
+
+.sin-resultados {
+    grid-column: 1 / -1;
+    padding: 2rem 1rem;
+    border: 1px dashed var(--borde);
+    color: var(--gris-metal);
+    text-align: center;
 }
 
 .acciones-carrito {
@@ -845,6 +879,49 @@ footer {
 
     header nav ul {
         justify-content: center;
+    }
+
+    .barra-navegacion {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .boton-menu {
+        display: inline-flex;
+    }
+
+    nav.menu-colapsable {
+        display: none;
+        width: 100%;
+    }
+
+    nav.menu-colapsable.menu-abierto {
+        display: block;
+    }
+
+    nav.menu-colapsable.menu-abierto ul {
+        flex-direction: column;
+        gap: 0.35rem;
+        padding-top: 0.5rem;
+    }
+
+    nav.menu-colapsable.menu-abierto li,
+    nav.menu-colapsable.menu-abierto a {
+        width: 100%;
+    }
+
+    nav.menu-colapsable.menu-abierto a {
+        display: block;
+        text-align: center;
+    }
+
+    .barra-navegacion nav.menu-abierto {
+        order: 3;
+        flex-basis: 100%;
+    }
+
+    .barra-navegacion .buscador {
+        margin-left: auto;
     }
 
     .buscador input {

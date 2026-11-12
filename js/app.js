@@ -1,5 +1,5 @@
-const nav = document.querySelector('nav');
-const links = nav.querySelectorAll('a');
+const nav = document.querySelector('header nav, .barra-navegacion nav');
+const links = nav ? nav.querySelectorAll('a') : [];
 const formularioNewsletter = document.querySelector('.newsletter-form');
 
 const CLAVE_CARRITO = 'carrito';
@@ -50,6 +50,58 @@ const eliminarCarritoGuardado = () => {
 };
 
 const formatearPrecio = (valor) => '$ ' + valor.toLocaleString('es-AR', { maximumFractionDigits: 0 });
+
+if (nav) {
+    const botonMenu = document.createElement('button');
+    botonMenu.type = 'button';
+    botonMenu.classList.add('boton-menu');
+    botonMenu.textContent = '☰';
+    botonMenu.setAttribute('aria-label', 'Abrir menú');
+    botonMenu.setAttribute('aria-expanded', 'false');
+
+    if (!nav.id) {
+        nav.id = 'menu-principal';
+    }
+
+    botonMenu.setAttribute('aria-controls', nav.id);
+    nav.classList.add('menu-colapsable');
+    nav.insertAdjacentElement('beforebegin', botonMenu);
+
+    const cerrarMenu = () => {
+        nav.classList.remove('menu-abierto');
+        botonMenu.setAttribute('aria-expanded', 'false');
+        botonMenu.setAttribute('aria-label', 'Abrir menú');
+    };
+
+    botonMenu.addEventListener('click', () => {
+        const abierto = nav.classList.toggle('menu-abierto');
+        botonMenu.setAttribute('aria-expanded', String(abierto));
+        botonMenu.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+    });
+
+    links.forEach((link) => {
+        link.addEventListener('click', cerrarMenu);
+    });
+
+    document.addEventListener('click', (evento) => {
+        if (!nav.classList.contains('menu-abierto')) {
+            return;
+        }
+
+        if (nav.contains(evento.target) || botonMenu.contains(evento.target)) {
+            return;
+        }
+
+        cerrarMenu();
+    });
+
+    document.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Escape' && nav.classList.contains('menu-abierto')) {
+            cerrarMenu();
+            botonMenu.focus();
+        }
+    });
+}
 
 links.forEach((link) => {
     link.addEventListener('click', () => {
