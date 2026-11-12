@@ -33,3 +33,6 @@ que me diga que borre las cards escritas a mano en index.html.
 7. ## Prediccióm
 Me gustario que OpenCode me avise que si cuando completo el formulario, me avise si el email esta mal y que cuando el cliente toque el boton de "suscribirme" con los campos vacios, el formulario no se envíe. 
 Al igual que si el email o formulario estan bien, no aparezco un error. 
+
+8. ## Predicción
+Me gustaria que OpenCode pudiera poner un solo listener en el contenedor de guitarra. Y que cuando se presione "añadir al carrito" en cualquier guitarra, aparezca en la pagina un mensaje con el nombre de ese producto y que el contador del carrito suba de a uno a uno. Ademas me gustaria que el boton de "Sin stock" no haga nada en mi pagina.
