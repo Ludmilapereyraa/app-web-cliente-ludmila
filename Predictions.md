@@ -6,3 +6,11 @@ Esperamos que OpenCode cree la estructura semántica completa con las páginas d
 
 3. ## Predicción Clase 3
 Me gustaria poder realizar con OpenCode todo el diseño de mi sitio web de guitarras, en donde se pueda lucir la gama de colores para dar con la estetica de la pagina pensada. Que genere un archivo "styles.css" para darle estilo general como la definición de tipografía, colores del sitio en variables y reseteo del "body, header, productos destacados, nav y footer".
+
+4. ## Predicción 
+Quiero que OpenCode cree un archivo js/app.js y lo vincule en mis páginas con
+defer. Espero que use querySelector y querySelectorAll para traer el nav, sus
+links y el botón del newsletter, y que al hacer clic en un link del menú le
+agregue la clase "activa" y se la quite a los demás con classList. Espero
+también que cree los mensajes de error con createElement y textContent (no
+innerHTML), y que use un solo listener para los botones "Añadir al carrito"
