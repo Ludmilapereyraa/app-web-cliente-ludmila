@@ -200,7 +200,7 @@ nav a.activa {
    __________________________________________________ */
 button {
     background: var(--rojo);
-    color: var(--negro);
+    color: #ffffff;
     border: 1px solid var(--rojo-oscuro);
     padding: 0.5rem 1rem;
     text-transform: uppercase;
@@ -293,6 +293,7 @@ main {
 /* Estilos de la caja del Filtro */
 #filtros {
     background: var(--negro);
+    color: #ffffff;
     border: 1px solid var(--borde);
     padding: 1rem;
     position: static;
