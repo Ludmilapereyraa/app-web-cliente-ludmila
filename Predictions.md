@@ -40,3 +40,11 @@ Me gustaria que OpenCode pudiera poner un solo listener en el contenedor de guit
 9. ## Predicción
 Deseo que OpenCode pueda hacer que los filtros de mi pagina funcionen de verdad, que al marcar una "marca" o "categoria" o precio de min o max, demuestre que funciona aplicando a las guitarras que cumplan con la condicion. 
 Ademas que el boton de "limpiar filtros" funcione y que si  no hay ningun producto que haga una especie de match, que muestre un mensaje avisando al usuario. El buscador igual tiene que cumplir su función de que si un usario escribe el nombre del producto que desea, este lo detecte y lo muestre en pantalla.
+
+10. ## Predicción
+Espero que al tocar cualquier guitarra, ya sea en las destacadas o en "Todas las
+guitarras", se abra la página del producto mostrando justo esa guitarra, con su
+imagen, nombre y precio. Espero que el botón "Añadir al carrito" de esa página
+funcione y sume al carrito, y que si el producto no existe aparezca un mensaje
+avisándolo. También espero que la guitarra agotada no se pueda agregar. Ademas de agregar un selector de ordenamiento que las ordene de menor precio a mayor precio, A-Z.
+Me gustaria que la IA pueda hacer que las guitarras destacadas aparezcan en una fila que se desplaza sola cada pocos segundos y vuelve al principio al llegar al final. Espero que se frene cuando paso el mouse por encima y que haya un botón para pausarlo
