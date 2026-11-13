@@ -31,101 +31,20 @@
             </ol>
         </nav>
 
-        <article id="detalle-producto">
-            <header>
-                <p>Categoría: <a href="index.html#productos">Guitarras Eléctricas</a></p>
-              <img src="img/Guitarra Eléctrica Stratocaster.webp" alt="Guitarra Eléctrica Stratocaster roja">
-
-                <h1>Guitarra Eléctrica Stratocaster</h1>
-            </header>
-
-            <p class="precio">Precio: $850.00</p><br>
-
-            <section>
-                <h2>Descripción detallada</h2>
-                <p>La Guitarra Eléctrica Stratocaster ofrece un sonido clásico y versátil que se adapta a estilos como rock, blues, funk y pop. Su cuerpo liviano y corte ergonómico garantizan máxima comodidad para tocar.</p>
-                <p>Cuenta con un mástil de arce de perfil suave que facilita el movimiento de la mano y tres micrófonos single-coil que entregan tonos limpios y potentes.</p>
-            </section><br>
-
-            <!-- Características principales -->
-            <section>
-                <h2>Características</h2>
-                <ul>
-                    <li>Cuerpo de aliso macizo con acabado brillante.</li>
-                    <li>Mástil de arce atornillado con diapasón de palo rosa.</li>
-                    <li>Configuración de 3 micrófonos single-coil.</li>
-                    <li>Llave selectora de 5 posiciones.</li>
-                    <li>Puente con trémolo vintage de 6 selletas.</li>
-                </ul>
-            </section><br>
-
-            <!-- Tabla de especificaciones técnicas -->
-            <section>
-                <h2>Ficha técnica</h2>
-                <table>
-                    <caption>Especificaciones técnicas de la Guitarra Eléctrica Stratocaster</caption>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Madera del cuerpo</th>
-                            <td>Aliso</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Madera del mástil</th>
-                            <td>Arce (Maple)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Cantidad de trastes</th>
-                            <td>21 Medium Jumbo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Escala</th>
-                            <td>25.5" (648 mm)</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Origen</th>
-                            <td>Importada</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section><br>
-
-            <!-- Formulario para elegir cantidad y comprar -->
-            <form action="carrito.html" method="get">
-                <div>
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number" id="cantidad" name="cantidad" min="1" max="5" value="1" required>
-                </div>
-
-                <div>
-                    <label for="acabado">Color / Acabado</label>
-                    <select id="acabado" name="acabado" required>
-                        <option value="rojo" selected>Rojo Sunburst</option>
-                        <option value="negro">Negro Gloss</option>
-                        <option value="blanco">Blanco Olympic</option>
-                    </select>
-                </div>
-
-                <input type="hidden" name="producto" value="Guitarra Eléctrica Stratocaster">
-                <input type="hidden" name="precio" value="850.00">
-
-                <button type="submit">Añadir al carrito</button>
-            </form><br>
-
-            <p><a href="index.html#productos">&larr; Volver al listado de productos</a></p><br>
-        </article><br>
+        <article id="detalle-producto"></article><br>
 
         <section id="relacionados">
             <h2>Productos relacionados</h2>
 
             <article class="producto">
-                <h3><a href="producto.html">Guitarra Electroacústica Dreadnought</a></h3>
+                <h3><a href="producto.html?id=2">Guitarra Electroacústica Dreadnought</a></h3>
                 <p>Tapa de abeto macizo con preamplificador integrado y afinador.</p>
                 <p class="precio">$520.00</p>
                 <button type="button">Añadir al carrito</button>
             </article>
 
             <article class="producto">
-                <h3><a href="producto.html">Bajo Leonard Precision Bass De Estudio</a></h3>
+                <h3><a href="producto.html?id=3">Bajo Leonard Precision Bass De Estudio</a></h3>
                 <p> Bajo eléctrico tipo Precision 4 cuerdas Cuerpo macizo .</p>
                 <p class="precio">$400.00</p>
                 <button type="button">Añadir al carrito</button>
@@ -137,6 +56,8 @@
     <footer>
         <p>&copy; 2026 Tu Tienda de Guitarras. Todos los derechos reservados.</p>
     </footer>
+    <script src="js/catalogo.js" defer></script>
+    <script src="js/carrito.js" defer></script>
     <script src="js/app.js" defer></script>
 </body>
 </html>
