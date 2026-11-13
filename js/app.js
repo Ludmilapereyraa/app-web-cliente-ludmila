@@ -117,13 +117,13 @@ const seccionesProductos = [
     document.querySelector('#productos')
 ].filter(Boolean);
 
-if (seccionesProductos.length > 0 && typeof productos !== 'undefined') {
+if (seccionesProductos.length > 0 && typeof obtenerProductos === 'function') {
     const mensajeCarrito = document.createElement('p');
     mensajeCarrito.classList.add('mensaje-carrito');
     mensajeCarrito.setAttribute('aria-live', 'polite');
     seccionesProductos[0].insertAdjacentElement('beforebegin', mensajeCarrito);
 
-    const agregarAlCarrito = (evento) => {
+    const agregarAlCarrito = async (evento) => {
         const boton = evento.target.closest('button');
 
         if (!boton) {
@@ -137,14 +137,20 @@ if (seccionesProductos.length > 0 && typeof productos !== 'undefined') {
         }
 
         const id = Number(tarjeta.dataset.id);
-        const producto = productos.find((item) => item.id === id);
 
-        if (!producto) {
-            return;
+        try {
+            const productosCargados = await obtenerProductos();
+            const producto = productosCargados.find((item) => item.id === id);
+
+            if (!producto) {
+                return;
+            }
+
+            agregarProductoAlCarrito(producto);
+            mensajeCarrito.textContent = `Agregaste ${producto.nombre} al carrito`;
+        } catch (error) {
+            mensajeCarrito.textContent = 'No pudimos cargar los productos. Intentá de nuevo.';
         }
-
-        agregarProductoAlCarrito(producto);
-        mensajeCarrito.textContent = `Agregaste ${producto.nombre} al carrito`;
     };
 
     seccionesProductos.forEach((seccion) => {
@@ -154,10 +160,14 @@ if (seccionesProductos.length > 0 && typeof productos !== 'undefined') {
 
 const contenedorDestacados = document.querySelector('#destacados');
 
-if (contenedorDestacados && typeof productos !== 'undefined' && typeof crearCard === 'function') {
-    const destacados = productos.filter((producto) => producto.destacado);
+if (contenedorDestacados && typeof obtenerProductos === 'function' && typeof crearCard === 'function') {
+    const iniciarCarrusel = (productosCargados) => {
+        const destacados = productosCargados.filter((producto) => producto.destacado);
 
-    if (destacados.length > 0) {
+        if (destacados.length === 0) {
+            return;
+        }
+
         const carrusel = document.createElement('div');
         carrusel.classList.add('carrusel');
         carrusel.setAttribute('role', 'region');
@@ -325,7 +335,22 @@ if (contenedorDestacados && typeof productos !== 'undefined' && typeof crearCard
         }
 
         iniciarAuto();
-    }
+    };
+
+    obtenerProductos()
+        .then(iniciarCarrusel)
+        .catch((error) => {
+            if (document.querySelector('#productos')) {
+                return;
+            }
+
+            const detalle = error instanceof Error ? error.message : 'Intentá de nuevo más tarde.';
+            const mensaje = document.createElement('p');
+            mensaje.classList.add('error-carga');
+            mensaje.setAttribute('role', 'alert');
+            mensaje.textContent = `No pudimos cargar las guitarras destacadas. ${detalle}`;
+            contenedorDestacados.append(mensaje);
+        });
 }
 
 const contenedorCarrito = document.querySelector('#vista-productos');
@@ -499,102 +524,135 @@ const detalleProducto = document.querySelector('#detalle-producto');
 if (detalleProducto) {
     const parametros = new URLSearchParams(window.location.search);
     const idBuscado = Number(parametros.get('id'));
-    const producto = typeof productos !== 'undefined'
-        ? productos.find((item) => item.id === idBuscado)
-        : null;
     const migaProducto = document.querySelector('main nav[aria-label="Miga de pan"] li[aria-current="page"]');
 
-    detalleProducto.textContent = '';
-
-    if (!producto) {
-        if (migaProducto) {
-            migaProducto.textContent = 'Guitarra no encontrada';
-        }
-
-        document.title = 'No encontramos esa guitarra';
+    const mostrarMensajeDetalle = (texto, esError = false) => {
+        detalleProducto.textContent = '';
 
         const mensaje = document.createElement('p');
-        mensaje.classList.add('vista-vacia');
-        mensaje.textContent = 'No encontramos esa guitarra';
+        mensaje.classList.add(esError ? 'error-carga' : 'cargando-productos');
+        mensaje.setAttribute('role', esError ? 'alert' : 'status');
+        mensaje.textContent = texto;
+        detalleProducto.append(mensaje);
+    };
 
-        const volver = document.createElement('p');
-        const enlaceVolver = document.createElement('a');
-        enlaceVolver.href = 'index.html#productos';
-        enlaceVolver.textContent = 'Volver a la tienda';
-        volver.append(enlaceVolver);
+    const cargarDetalleProducto = async () => {
+        mostrarMensajeDetalle('Cargando guitarras...');
 
-        detalleProducto.append(mensaje, volver);
-    } else {
-        if (migaProducto) {
-            migaProducto.textContent = producto.nombre;
+        if (typeof obtenerProductos !== 'function') {
+            mostrarMensajeDetalle('No pudimos cargar las guitarras.', true);
+            return;
         }
 
-        document.title = producto.nombre;
+        try {
+            const productosCargados = await obtenerProductos();
+            const producto = productosCargados.find((item) => item.id === idBuscado);
 
-        const metaDescripcion = document.querySelector('meta[name="description"]');
+            detalleProducto.textContent = '';
 
-        if (metaDescripcion) {
-            metaDescripcion.setAttribute('content', producto.descripcion);
+            if (!producto) {
+                if (migaProducto) {
+                    migaProducto.textContent = 'Guitarra no encontrada';
+                }
+
+                document.title = 'No encontramos esa guitarra';
+
+                const mensaje = document.createElement('p');
+                mensaje.classList.add('vista-vacia');
+                mensaje.textContent = 'No encontramos esa guitarra';
+
+                const volver = document.createElement('p');
+                const enlaceVolver = document.createElement('a');
+                enlaceVolver.href = 'index.html#productos';
+                enlaceVolver.textContent = 'Volver a la tienda';
+                volver.append(enlaceVolver);
+
+                detalleProducto.append(mensaje, volver);
+                return;
+            }
+
+            if (migaProducto) {
+                migaProducto.textContent = producto.nombre;
+            }
+
+            document.title = producto.nombre;
+
+            const metaDescripcion = document.querySelector('meta[name="description"]');
+
+            if (metaDescripcion) {
+                metaDescripcion.setAttribute('content', producto.descripcion);
+            }
+
+            const encabezado = document.createElement('header');
+
+            const categoria = document.createElement('p');
+            categoria.textContent = `Categoría: ${producto.categoria}`;
+
+            const marca = document.createElement('p');
+            marca.textContent = `Marca: ${producto.marca}`;
+
+            const imagen = document.createElement('img');
+            imagen.src = producto.imagen;
+            imagen.alt = producto.alt;
+
+            const titulo = document.createElement('h1');
+            titulo.textContent = producto.nombre;
+
+            encabezado.append(categoria, marca, imagen, titulo);
+
+            const precioElemento = document.createElement('p');
+            precioElemento.classList.add('precio');
+            precioElemento.textContent = `Precio: ${precio(producto.precio)}`;
+
+            const descripcion = document.createElement('section');
+            const tituloDescripcion = document.createElement('h2');
+            tituloDescripcion.textContent = 'Descripción';
+            const textoDescripcion = document.createElement('p');
+            textoDescripcion.textContent = producto.descripcion;
+            descripcion.append(tituloDescripcion, textoDescripcion);
+
+            const acciones = document.createElement('div');
+            acciones.classList.add('acciones-producto');
+
+            const botonAgregar = document.createElement('button');
+            botonAgregar.type = 'button';
+
+            if (producto.stock === 0) {
+                botonAgregar.textContent = 'SIN STOCK';
+                botonAgregar.disabled = true;
+            } else {
+                botonAgregar.textContent = 'Añadir al carrito';
+            }
+
+            const mensaje = document.createElement('p');
+            mensaje.classList.add('mensaje-carrito');
+            mensaje.setAttribute('aria-live', 'polite');
+
+            botonAgregar.addEventListener('click', () => {
+                agregarProductoAlCarrito(producto);
+                mensaje.textContent = `Agregaste ${producto.nombre} al carrito`;
+            });
+
+            acciones.append(botonAgregar, mensaje);
+
+            const volver = document.createElement('p');
+            const enlaceVolver = document.createElement('a');
+            enlaceVolver.href = 'index.html#productos';
+            enlaceVolver.textContent = '← Volver al listado de productos';
+            volver.append(enlaceVolver);
+
+            detalleProducto.append(encabezado, precioElemento, descripcion, acciones, volver);
+        } catch (error) {
+            if (migaProducto) {
+                migaProducto.textContent = 'Error al cargar';
+            }
+
+            document.title = 'Error al cargar las guitarras';
+
+            const detalle = error instanceof Error ? error.message : 'Intentá de nuevo más tarde.';
+            mostrarMensajeDetalle(`No pudimos cargar las guitarras. ${detalle}`, true);
         }
+    };
 
-        const encabezado = document.createElement('header');
-
-        const categoria = document.createElement('p');
-        categoria.textContent = `Categoría: ${producto.categoria}`;
-
-        const marca = document.createElement('p');
-        marca.textContent = `Marca: ${producto.marca}`;
-
-        const imagen = document.createElement('img');
-        imagen.src = producto.imagen;
-        imagen.alt = producto.alt;
-
-        const titulo = document.createElement('h1');
-        titulo.textContent = producto.nombre;
-
-        encabezado.append(categoria, marca, imagen, titulo);
-
-        const precioElemento = document.createElement('p');
-        precioElemento.classList.add('precio');
-        precioElemento.textContent = `Precio: ${precio(producto.precio)}`;
-
-        const descripcion = document.createElement('section');
-        const tituloDescripcion = document.createElement('h2');
-        tituloDescripcion.textContent = 'Descripción';
-        const textoDescripcion = document.createElement('p');
-        textoDescripcion.textContent = producto.descripcion;
-        descripcion.append(tituloDescripcion, textoDescripcion);
-
-        const acciones = document.createElement('div');
-        acciones.classList.add('acciones-producto');
-
-        const botonAgregar = document.createElement('button');
-        botonAgregar.type = 'button';
-
-        if (producto.stock === 0) {
-            botonAgregar.textContent = 'SIN STOCK';
-            botonAgregar.disabled = true;
-        } else {
-            botonAgregar.textContent = 'Añadir al carrito';
-        }
-
-        const mensaje = document.createElement('p');
-        mensaje.classList.add('mensaje-carrito');
-        mensaje.setAttribute('aria-live', 'polite');
-
-        botonAgregar.addEventListener('click', () => {
-            agregarProductoAlCarrito(producto);
-            mensaje.textContent = `Agregaste ${producto.nombre} al carrito`;
-        });
-
-        acciones.append(botonAgregar, mensaje);
-
-        const volver = document.createElement('p');
-        const enlaceVolver = document.createElement('a');
-        enlaceVolver.href = 'index.html#productos';
-        enlaceVolver.textContent = '← Volver al listado de productos';
-        volver.append(enlaceVolver);
-
-        detalleProducto.append(encabezado, precioElemento, descripcion, acciones, volver);
-    }
+    cargarDetalleProducto();
 }
