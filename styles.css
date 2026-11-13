@@ -606,6 +606,23 @@ tfoot tr:last-child td {
     text-align: center;
 }
 
+.cargando-productos,
+.error-carga {
+    grid-column: 1 / -1;
+    padding: 2rem 1rem;
+    border: 1px dashed var(--borde);
+    text-align: center;
+}
+
+.cargando-productos {
+    color: var(--gris-metal);
+}
+
+.error-carga {
+    color: var(--rojo-claro);
+    border-color: var(--marron);
+}
+
 .acciones-carrito {
     display: flex;
     flex-wrap: wrap;

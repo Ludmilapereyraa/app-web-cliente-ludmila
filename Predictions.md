@@ -48,3 +48,10 @@ imagen, nombre y precio. Espero que el botón "Añadir al carrito" de esa págin
 funcione y sume al carrito, y que si el producto no existe aparezca un mensaje
 avisándolo. También espero que la guitarra agotada no se pueda agregar. Ademas de agregar un selector de ordenamiento que las ordene de menor precio a mayor precio, A-Z.
 Me gustaria que la IA pueda hacer que las guitarras destacadas aparezcan en una fila que se desplaza sola cada pocos segundos y vuelve al principio al llegar al final. Espero que se frene cuando paso el mouse por encima y que haya un botón para pausarlo
+
+11. ## Predicción
+## Predicción (Supabase)
+(Nota: me olvidé de escribir esta predicción antes, así que la escribí después de ejecutar el prompt.)
+Esperaba que OpenCode hiciera que mis guitarras ya no estén escritas a mano en el código, sino que la página las pida a Supabase con fetch, usando async/await y try/catch. Esperaba que mientras llegan los datos aparezca "Cargando guitarras...", que si algo falla se muestre un mensaje en la página, y que las cards, los filtros, el carrusel, el detalle de producto y el carrito sigan funcionando igual.
+
+**Resultado:** coincidió. Los productos se cargan desde Supabase y revisa res.ok. 

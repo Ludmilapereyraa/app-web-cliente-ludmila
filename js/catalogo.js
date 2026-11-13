@@ -1,77 +1,31 @@
-const productos = [
-    {
-        id: 1,
-        nombre: 'Guitarra Eléctrica Stratocaster',
-        precio: 850,
-        stock: 5,
-        destacado: true,
-        categoria: 'electrica',
-        marca: 'stratocaster',
-        descripcion: 'Guitarra eléctrica versátil con cuerpo de aliso y tres micrófonos single-coil.',
-        imagen: 'img/Guitarra Eléctrica Stratocaster.webp',
-        alt: 'Guitarra eléctrica Stratocaster roja'
-    },
-    {
-        id: 2,
-        nombre: 'Guitarra Electroacústica Dreadnought',
-        precio: 520,
-        stock: 3,
-        destacado: true,
-        categoria: 'acustica',
-        marca: 'dreadnought',
-        descripcion: 'Electroacústica con tapa de abeto macizo, preamplificador y afinador integrado.',
-        imagen: 'img/Guitarra Electroacústica Dreadnought.webp',
-        alt: 'Guitarra electroacústica Dreadnought'
-    },
-    {
-        id: 3,
-        nombre: 'Bajo Leonard Precision Bass De Estudio',
-        precio: 400,
-        stock: 2,
-        destacado: true,
-        categoria: 'bajo',
-        marca: 'leonard',
-        descripcion: 'Bajo eléctrico Precision de 4 cuerdas, cómodo para estudio y escenario.',
-        imagen: 'img/Bajo Leonard Precision Bass De Estudio.webp',
-        alt: 'Bajo Leonard Precision Bass de estudio'
-    },
-    {
-        id: 4,
-        nombre: 'Guitarra Eléctrica Squier by Fender',
-        precio: 950,
-        stock: 4,
-        destacado: true,
-        categoria: 'electrica',
-        marca: 'fender',
-        descripcion: 'Guitarra eléctrica Squier by Fender con sonido clásico y gran relación precio-calidad.',
-        imagen: 'img/Fender-roja.webp',
-        alt: 'Guitarra eléctrica Squier by Fender roja'
-    },
-    {
-        id: 5,
-        nombre: 'Guitarra Clásica Criolla Aston Reed de Estudio',
-        precio: 100,
-        stock: 0,
-        destacado: true,
-        categoria: 'acustica',
-        marca: 'aston',
-        descripcion: 'Guitarra criolla de estudio con cuerpo liviano y sonido cálido.',
-        imagen: 'img/criolla-azul.webp',
-        alt: 'Guitarra clásica criolla Aston Reed azul'
-    },
-    {
-        id: 6,
-        nombre: 'Guitarra Eléctrica Black Cherry ESP LTD',
-        precio: 550,
-        stock: 6,
-        destacado: true,
-        categoria: 'electrica',
-        marca: 'esp ltd',
-        descripcion: 'Guitarra eléctrica ESP LTD con estética Black Cherry y micrófonos de alta salida.',
-        imagen: 'img/electrica-roja-leopardo.webp',
-        alt: 'Guitarra eléctrica Black Cherry ESP LTD roja con diseño de leopardo'
-    }
-];
+const SUPABASE_URL = 'https://mqtbqukaylhvgbopujya.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_qWYdccfQ0FoazFvcRtyWCQ_2S9r5vBc';
+
+let productos = [];
+let promesaProductos = null;
+
+const normalizarProducto = (producto) => {
+    const id = Number(producto.id);
+    const precioNumero = Number(producto.precio);
+    const stock = Number(producto.stock);
+    const destacado = producto.destacado === true
+        || producto.destacado === 'true'
+        || Number(producto.destacado) === 1;
+
+    return {
+        ...producto,
+        id: Number.isFinite(id) ? id : producto.id,
+        nombre: String(producto.nombre ?? ''),
+        precio: Number.isFinite(precioNumero) ? precioNumero : 0,
+        stock: Number.isFinite(stock) ? stock : 0,
+        destacado,
+        categoria: String(producto.categoria ?? ''),
+        marca: String(producto.marca ?? ''),
+        descripcion: String(producto.descripcion ?? ''),
+        imagen: String(producto.imagen ?? ''),
+        alt: String(producto.alt ?? '')
+    };
+};
 
 const precio = (n) => '$ ' + n.toLocaleString('es-AR', { maximumFractionDigits: 0 });
 
@@ -90,16 +44,11 @@ const separarPorStock = (lista) => {
     return { disponibles, agotados };
 };
 
-const { disponibles, agotados } = separarPorStock(productos);
-
 const mostrarGrupo = (titulo, grupo) => {
     console.group(titulo);
     console.table(grupo);
     console.groupEnd();
 };
-
-mostrarGrupo('Disponibles', disponibles);
-mostrarGrupo('Agotados', agotados);
 
 const nombresMayoresA100 = (lista) => lista
     .filter((producto) => producto.precio > 100)
@@ -119,18 +68,70 @@ const calcularTotalConIva = (lista) => {
     };
 };
 
-const nombres = nombresMayoresA100(productos);
-const totales = calcularTotalConIva(productos);
+const mostrarResumenProductos = () => {
+    const { disponibles, agotados } = separarPorStock(productos);
+    mostrarGrupo('Disponibles', disponibles);
+    mostrarGrupo('Agotados', agotados);
 
-console.group('Nombres con precio mayor a 100');
-console.table(nombres);
-console.groupEnd();
+    const nombres = nombresMayoresA100(productos);
+    const totales = calcularTotalConIva(productos);
 
-console.group('Totales');
-console.log('Subtotal:', precio(totales.subtotal));
-console.log('IVA 21%:', precio(totales.iva));
-console.log('Total con IVA:', precio(totales.total));
-console.groupEnd();
+    console.group('Nombres con precio mayor a 100');
+    console.table(nombres);
+    console.groupEnd();
+
+    console.group('Totales');
+    console.log('Subtotal:', precio(totales.subtotal));
+    console.log('IVA 21%:', precio(totales.iva));
+    console.log('Total con IVA:', precio(totales.total));
+    console.groupEnd();
+};
+
+const obtenerProductos = async () => {
+    if (promesaProductos) {
+        return promesaProductos;
+    }
+
+    promesaProductos = (async () => {
+        try {
+            const respuesta = await fetch(`${SUPABASE_URL}/rest/v1/productos?select=*&order=id.asc`, {
+                headers: {
+                    apikey: SUPABASE_KEY,
+                    Authorization: `Bearer ${SUPABASE_KEY}`
+                }
+            });
+
+            if (!respuesta.ok) {
+                throw new Error(`Error ${respuesta.status} al cargar los productos`);
+            }
+
+            const datos = await respuesta.json();
+
+            if (!Array.isArray(datos)) {
+                throw new Error('Supabase no devolvió una lista de productos');
+            }
+
+            productos = datos
+                .filter((producto) => producto && typeof producto === 'object')
+                .map(normalizarProducto);
+
+            mostrarResumenProductos();
+            return productos;
+        } catch (error) {
+            if (error instanceof TypeError) {
+                throw new Error('Error de conexión con Supabase');
+            }
+
+            if (error instanceof Error) {
+                throw error;
+            }
+
+            throw new Error('Error desconocido al cargar los productos');
+        }
+    })();
+
+    return promesaProductos;
+};
 
 const crearCard = (producto, mostrarDescripcion = false) => {
     const card = document.createElement('div');
@@ -186,6 +187,25 @@ if (contenedorProductos) {
     const inputPrecioMin = document.querySelector('#precio-min');
     const inputPrecioMax = document.querySelector('#precio-max');
     const selectorOrden = document.querySelector('#ordenar');
+    let catalogoListo = false;
+
+    const mostrarEstadoCatalogo = (texto, esError = false) => {
+        contenedorProductos.textContent = '';
+
+        if (tituloProductos) {
+            contenedorProductos.append(tituloProductos);
+        }
+
+        if (barraOrden) {
+            contenedorProductos.append(barraOrden);
+        }
+
+        const mensaje = document.createElement('p');
+        mensaje.classList.add(esError ? 'error-carga' : 'cargando-productos');
+        mensaje.setAttribute('role', esError ? 'alert' : 'status');
+        mensaje.textContent = texto;
+        contenedorProductos.append(mensaje);
+    };
 
     const renderizarProductos = (lista) => {
         contenedorProductos.textContent = '';
@@ -260,6 +280,10 @@ if (contenedorProductos) {
     };
 
     const aplicarFiltros = () => {
+        if (!catalogoListo) {
+            return;
+        }
+
         const criterios = {
             texto: inputBusqueda ? inputBusqueda.value.trim().toLowerCase() : '',
             categorias: obtenerTildados('categoria'),
@@ -322,5 +346,18 @@ if (contenedorProductos) {
         });
     }
 
-    aplicarFiltros();
+    const iniciarCatalogo = async () => {
+        mostrarEstadoCatalogo('Cargando guitarras...');
+
+        try {
+            await obtenerProductos();
+            catalogoListo = true;
+            aplicarFiltros();
+        } catch (error) {
+            const detalle = error instanceof Error ? error.message : 'Intentá de nuevo más tarde.';
+            mostrarEstadoCatalogo(`No pudimos cargar las guitarras. ${detalle}`, true);
+        }
+    };
+
+    iniciarCatalogo();
 }
